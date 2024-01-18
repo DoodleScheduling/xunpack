@@ -22,11 +22,11 @@ import (
 
 type Config struct {
 	Log struct {
-		Level    string `env:"LOG_LEVEL"`
-		Encoding string `env:"LOG_ENCODING"`
+		Level    string `env:"LOG_LEVEL, default=info"`
+		Encoding string `env:"LOG_ENCODING, default=json"`
 	}
-	File         string `env:"FILE"`
-	Output       string `env:"OUTPUT"`
+	File         string `env:"FILE, default=/dev/stdin"`
+	Output       string `env:"OUTPUT, default=/dev/stdout"`
 	FailFast     bool   `env:"FAIL_FAST"`
 	AllowFailure bool   `env:"ALLOW_FAILURE"`
 	Workers      int    `env:"WORKERS"`
@@ -37,22 +37,26 @@ var (
 )
 
 func init() {
-	flag.StringVarP(&config.Log.Level, "log-level", "l", "info", "Define the log level (default is warning) [debug,info,warn,error]")
-	flag.StringVarP(&config.Log.Encoding, "log-encoding", "e", "json", "Define the log format (default is json) [json,console]")
-	flag.StringVarP(&config.File, "file", "f", "/dev/stdin", "Path to input")
-	flag.StringVarP(&config.Output, "output", "o", "/dev/stdout", "Path to output")
+	flag.StringVarP(&config.Log.Level, "log-level", "l", "", "Define the log level (default is warning) [debug,info,warn,error]")
+	flag.StringVarP(&config.Log.Encoding, "log-encoding", "e", "", "Define the log format (default is json) [json,console]")
+	flag.StringVarP(&config.File, "file", "f", "", "Path to input")
+	flag.StringVarP(&config.Output, "output", "o", "", "Path to output")
 	flag.BoolVar(&config.AllowFailure, "allow-failure", false, "Do not exit > 0 if an error occured")
 	flag.BoolVar(&config.FailFast, "fail-fast", false, "Exit early if an error occured")
-	flag.IntVar(&config.Workers, "workers", runtime.NumCPU(), "Workers used to parse manifests")
+	flag.IntVar(&config.Workers, "workers", 0, "Workers used to parse manifests")
 }
 
 func main() {
-	ctx := context.Background()
+	ctx := context.TODO()
 	if err := envconfig.Process(ctx, config); err != nil {
 		log.Fatal(err)
 	}
 
 	flag.Parse()
+
+	if config.Workers == 0 {
+		config.Workers = runtime.NumCPU()
+	}
 
 	logger, err := buildLogger()
 	must(err)

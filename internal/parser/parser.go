@@ -2,8 +2,6 @@ package parser
 
 import (
 	"archive/tar"
-	"bufio"
-	"bytes"
 	"context"
 	"io"
 	"os"
@@ -17,6 +15,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 	"github.com/google/go-containerregistry/pkg/v1/tarball"
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/cli-runtime/pkg/printers"
@@ -56,19 +55,19 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 		Workers: 1,
 	})
 
-	manifests := make(chan []byte, p.Workers)
+	objects := make(chan runtime.Object, p.Workers)
 
 	outWriter.Push(worker.Task(func(ctx context.Context) error {
 		for {
 			select {
 			case <-ctx.Done():
 				return nil
-			case manifest, ok := <-manifests:
+			case obj, ok := <-objects:
 				if !ok {
 					return nil
 				}
 
-				_, err := p.Output.Write(append([]byte("---\n"), manifest...))
+				err := p.Printer.PrintObj(obj, p.Output)
 				if err != nil {
 					p.Logger.Error(err, "failed to write manifests to output")
 					return abort(err)
@@ -83,26 +82,27 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 	}
 
 	for _, resourceYAML := range strings.Split(string(manifest), "---") {
+		r := resourceYAML
 		pool.Push(worker.Task(func(ctx context.Context) error {
 			if len(resourceYAML) == 0 {
 				return nil
 			}
 
 			obj, gvk, err := p.Decoder.Decode(
-				[]byte(resourceYAML),
+				[]byte(r),
 				nil,
 				nil)
 			if err != nil {
 				return nil
 			}
 
-			return p.handleResource(obj, gvk, manifests)
+			return p.handleResource(obj, gvk, objects)
 		}))
 
 	}
 
 	p.exit(pool)
-	close(manifests)
+	close(objects)
 	p.exit(outWriter)
 	return nil
 }
@@ -117,10 +117,9 @@ func (p *Parser) exit(waiters ...worker.Waiter) {
 	}
 }
 
-func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind, out chan []byte) error {
+func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind, out chan runtime.Object) error {
 	if gvk.Group == "pkg.crossplane.io" && gvk.Kind == "Provider" {
 		provider := obj.(*crossplanev1.Provider)
-
 		p.Logger.Info("unpacking provider", "name", provider.Name, "url", provider.Spec.Package)
 
 		manifest, err := p.unpack(provider)
@@ -139,37 +138,33 @@ func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind
 
 		crd.Kind = "CustomResourceDefinition"
 		crd.APIVersion = "apiextensions.k8s.io/v1"
-
-		var b bytes.Buffer
-		err = p.Printer.PrintObj(crd, bufio.NewWriter(&b))
-		if err != nil {
-			return err
-		}
-
-		out <- b.Bytes()
+		out <- crd
 	}
 
 	return nil
 }
 
-func (p *Parser) parseManifest(manifest []byte, out chan []byte) error {
+func (p *Parser) parseManifest(manifest []byte, out chan runtime.Object) error {
 	for _, resourceYAML := range strings.Split(string(manifest), "---") {
 		if len(resourceYAML) == 0 {
 			continue
 		}
 
+		obj := unstructured.Unstructured{}
 		_, gvk, err := p.Decoder.Decode(
 			[]byte(resourceYAML),
 			nil,
-			nil)
+			&obj)
 
-		if err != nil {
-			out <- []byte(resourceYAML)
-		} else {
-			// exclude meta resources
-			if gvk.Group != "meta.pkg.crossplane.io" {
-				out <- []byte(resourceYAML)
-			}
+		if err != nil && !runtime.IsMissingKind(err) {
+			return err
+		} else if runtime.IsMissingKind(err) {
+			continue
+		}
+
+		// exclude meta resources
+		if gvk.Group != "meta.pkg.crossplane.io" {
+			out <- &obj
 		}
 	}
 
