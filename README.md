@@ -3,7 +3,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/doodlescheduling/xunpack)](https://goreportcard.com/report/github.com/doodlescheduling/xunpack)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/xunpack/badge)](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/xunpack)
 [![Coverage Status](https://coveralls.io/repos/github/DoodleScheduling/xunpack/badge.svg?branch=master)](https://coveralls.io/github/DoodleScheduling/xunpack?branch=master)
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/xunpack)](https://artifacthub.io/packages/search?repo=xunpack)
 
 This small utitily extrats manifests from crossplane packages
 as well as converts any CompositeResourceDefinitions into CustomResourceDefinitions.
