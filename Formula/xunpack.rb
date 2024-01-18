@@ -5,20 +5,20 @@
 class Xunpack < Formula
   desc "Extract crossplane resources"
   homepage "https://github.com/DoodleScheduling/xunpack"
-  version "0.0.2"
+  version "0.0.3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.2/xunpack_0.0.2_darwin_amd64.tar.gz"
-      sha256 "8f8f8d3958b8aa4bbdc78c322776466dda9527d24affcfd21e813827016e76d2"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.3/xunpack_0.0.3_darwin_amd64.tar.gz"
+      sha256 "09a6480729f3e275b04538549e5dab58f3cb5fcfadcef223d79d7f87a42842c9"
 
       def install
         bin.install "xunpack"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.2/xunpack_0.0.2_darwin_arm64.tar.gz"
-      sha256 "7b7b50c0fb36b1d1b26f9341d3bde66258666818cb9cdf3532f3da4f7c381289"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.3/xunpack_0.0.3_darwin_arm64.tar.gz"
+      sha256 "2d6157f56153630ac68551aa7892a16499edf65570e5764e9b72c3dd9d8c682d"
 
       def install
         bin.install "xunpack"
@@ -28,16 +28,16 @@ class Xunpack < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.2/xunpack_0.0.2_linux_arm64.tar.gz"
-      sha256 "258b80eb3a57fef8848b6b319865c15946cc8927c555588b8092eedf00f3f77c"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.3/xunpack_0.0.3_linux_arm64.tar.gz"
+      sha256 "241801e2008d245dec62dda6ca036bfdaa5c4330dea8cd0d51d33717e9e80e9b"
 
       def install
         bin.install "xunpack"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.2/xunpack_0.0.2_linux_amd64.tar.gz"
-      sha256 "3377b84ab3dce1c47d364b9b365761423157e79d62ee409932ee3eb008341582"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.3/xunpack_0.0.3_linux_amd64.tar.gz"
+      sha256 "2eab1f30696c7f4c27b4f90b177acf8618fbc0645f2aa84266bb417c7024a242"
 
       def install
         bin.install "xunpack"
