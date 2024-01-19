@@ -67,10 +67,9 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 					return nil
 				}
 
-				_, errNewLine := p.Output.Write([]byte("---\n"))
 				err := p.Printer.PrintObj(obj, p.Output)
 
-				if err != nil || errNewLine != nil {
+				if err != nil {
 					p.Logger.Error(err, "failed to write manifests to output")
 					return abort(err)
 				}
@@ -141,6 +140,17 @@ func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind
 		crd.Kind = "CustomResourceDefinition"
 		crd.APIVersion = "apiextensions.k8s.io/v1"
 		out <- crd
+
+		if xcrDefinition.Spec.ClaimNames.Kind != "" {
+			crd, err := xcrd.ForCompositeResourceClaim(xcrDefinition)
+			if err != nil {
+				return err
+			}
+
+			crd.Kind = "CustomResourceDefinition"
+			crd.APIVersion = "apiextensions.k8s.io/v1"
+			out <- crd
+		}
 	}
 
 	return nil
