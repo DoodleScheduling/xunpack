@@ -5,20 +5,20 @@
 class Xunpack < Formula
   desc "Extract crossplane resources"
   homepage "https://github.com/DoodleScheduling/xunpack"
-  version "0.0.4"
+  version "0.0.5"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.4/xunpack_0.0.4_darwin_amd64.tar.gz"
-      sha256 "7f0b79458a8c9414df85704ace32e7b7ca24337d3104026294332cf16a988edc"
+    if Hardware::CPU.arm?
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.5/xunpack_0.0.5_darwin_arm64.tar.gz"
+      sha256 "671b168d8ebdbf3e06d571bd96cf01797a3ab831590e5461ee293174b071096b"
 
       def install
         bin.install "xunpack"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.4/xunpack_0.0.4_darwin_arm64.tar.gz"
-      sha256 "d4341fa60732eb865f54218032d9b2e6990832266fd9a5d7e51e5903556a7eac"
+    if Hardware::CPU.intel?
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.5/xunpack_0.0.5_darwin_amd64.tar.gz"
+      sha256 "566e4c2622b7880990f6f1ed783b368f30ff1c622226771d5b303896da0a5220"
 
       def install
         bin.install "xunpack"
@@ -28,16 +28,16 @@ class Xunpack < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.4/xunpack_0.0.4_linux_arm64.tar.gz"
-      sha256 "ff0e51be0b58703d427c011fb8b32d3471f85ea233ffcfdd7e394da86ecaa458"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.5/xunpack_0.0.5_linux_arm64.tar.gz"
+      sha256 "5b1649ec20bcf7990e781ac8df7a20dddb49038d7b23b49849f8277240db9c62"
 
       def install
         bin.install "xunpack"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.4/xunpack_0.0.4_linux_amd64.tar.gz"
-      sha256 "e20bacbe5bb5f39d5407539511c68d7f90ec4849d1be39cc437fc810923daa62"
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.5/xunpack_0.0.5_linux_amd64.tar.gz"
+      sha256 "cc2128ef75ee88c8f910f3163348f55be54064151e772fff9be23f5867b27e13"
 
       def install
         bin.install "xunpack"
