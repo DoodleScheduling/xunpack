@@ -67,8 +67,10 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 					return nil
 				}
 
+				_, errNewLine := p.Output.Write([]byte("---\n"))
 				err := p.Printer.PrintObj(obj, p.Output)
-				if err != nil {
+
+				if err != nil || errNewLine != nil {
 					p.Logger.Error(err, "failed to write manifests to output")
 					return abort(err)
 				}
@@ -205,6 +207,10 @@ func (p *Parser) unpack(pkg *crossplanev1.Provider) ([]byte, error) {
 	}
 
 	layers, err := ociImage.Layers()
+	if err != nil {
+		return nil, err
+	}
+
 	for _, layer := range layers {
 		contents, err := layer.Uncompressed()
 		if err != nil {
