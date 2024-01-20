@@ -7,7 +7,7 @@ require (
 	github.com/crossplane/crossplane v1.14.5
 	github.com/crossplane/crossplane-runtime v1.14.3
 	github.com/go-logr/logr v1.4.1
-	github.com/go-logr/zapr v1.2.4
+	github.com/go-logr/zapr v1.3.0
 	github.com/google/go-cmp v0.6.0
 	github.com/google/go-containerregistry v0.16.1
 	github.com/sethvargo/go-envconfig v0.9.0
@@ -57,7 +57,6 @@ require (
 	github.com/prometheus/common v0.45.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/afero v1.10.0 // indirect
-	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/vbatts/tar-split v0.11.5 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
