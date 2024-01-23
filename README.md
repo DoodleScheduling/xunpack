@@ -27,13 +27,13 @@ docker pull ghcr.io/doodlescheduling/xunpack:v0
 
 ## Arguments
 
-| Flag  | Env | Default | Description |
+| Flag  | Short | Env | Default | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| `--file`  | `IFILE` | `/dev/stdin` | Path to input |
-| `--workers`  | `WORKERS`  | `Number of CPU cores` | Number of workers to process the manifest |
-| `--fail-fast`  | `FAIL_FAST` | `false` | Exit early if an error occured |
-| `--allow-failure`  | `ALLOW_FAILURE` | `false` | Do not exit > 0 if an error occured |
-| `--output`  | `OUTPUT` | `/dev/stdout` | Path to output file |
+| `--file`  | `-f`  | `IFILE` | `/dev/stdin` | Path to input |
+| `--workers`  | ``  | `WORKERS`  | `Number of CPU cores` | Number of workers to process the manifest |
+| `--fail-fast`  | ``  | `FAIL_FAST` | `false` | Exit early if an error occured |
+| `--allow-failure`  | ``  | `ALLOW_FAILURE` | `false` | Do not exit > 0 if an error occured |
+| `--output`  | `-o`  | `OUTPUT` | `/dev/stdout` | Path to output file |
 
 
 ## Github Action
@@ -59,7 +59,7 @@ jobs:
     - uses: docker://ghcr.io/doodlescheduling/xunpack:v0
       env:
         PATHS: ./${{ matrix.cluster }}
-        OUTPUT: /dev/null
+        OUTPUT: build.yaml
 ```
 
 ### Advanced example

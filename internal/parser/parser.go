@@ -2,6 +2,7 @@ package parser
 
 import (
 	"archive/tar"
+	"bufio"
 	"context"
 	"io"
 	"os"
@@ -18,6 +19,7 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+	utilyaml "k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/cli-runtime/pkg/printers"
 )
 
@@ -77,20 +79,21 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 		}
 	}))
 
-	manifest, err := io.ReadAll(in)
-	if err != nil {
-		return err
-	}
+	multidocReader := utilyaml.NewYAMLReader(bufio.NewReader(in))
 
-	for _, resourceYAML := range strings.Split(string(manifest), "---") {
-		r := resourceYAML
-		pool.Push(worker.Task(func(ctx context.Context) error {
-			if len(resourceYAML) == 0 {
-				return nil
+	for {
+		resourceYAML, err := multidocReader.Read()
+		if err != nil {
+			if err == io.EOF {
+				break
 			}
 
+			return err
+		}
+
+		pool.Push(worker.Task(func(ctx context.Context) error {
 			obj, gvk, err := p.Decoder.Decode(
-				[]byte(r),
+				resourceYAML,
 				nil,
 				nil)
 			if err != nil {
@@ -99,7 +102,6 @@ func (p *Parser) Run(ctx context.Context, in io.Reader) error {
 
 			return p.handleResource(obj, gvk, objects)
 		}))
-
 	}
 
 	p.exit(pool)
