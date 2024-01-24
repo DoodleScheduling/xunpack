@@ -27,8 +27,8 @@ docker pull ghcr.io/doodlescheduling/xunpack:v0
 
 ## Arguments
 
-| Flag  | Short | Env | Default | Description |
-| ------------- | ------------- | ------------- | ------------- |
+| Flag           | Short        | Env            | Default      | Description   |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
 | `--file`  | `-f`  | `IFILE` | `/dev/stdin` | Path to input |
 | `--workers`  | ``  | `WORKERS`  | `Number of CPU cores` | Number of workers to process the manifest |
 | `--fail-fast`  | ``  | `FAIL_FAST` | `false` | Exit early if an error occured |
