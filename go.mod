@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24
 	github.com/crossplane/crossplane v1.14.5
-	github.com/crossplane/crossplane-runtime v1.14.3
+	github.com/crossplane/crossplane-runtime v1.14.4
 	github.com/go-logr/logr v1.4.1
 	github.com/go-logr/zapr v1.3.0
 	github.com/google/go-cmp v0.6.0
