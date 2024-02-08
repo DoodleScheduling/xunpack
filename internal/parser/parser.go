@@ -141,6 +141,7 @@ func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind
 
 		crd.Kind = "CustomResourceDefinition"
 		crd.APIVersion = "apiextensions.k8s.io/v1"
+		crd.OwnerReferences = nil
 		out <- crd
 
 		if xcrDefinition.Spec.ClaimNames.Kind != "" {
@@ -151,6 +152,7 @@ func (p *Parser) handleResource(obj runtime.Object, gvk *schema.GroupVersionKind
 
 			crd.Kind = "CustomResourceDefinition"
 			crd.APIVersion = "apiextensions.k8s.io/v1"
+			crd.OwnerReferences = nil
 			out <- crd
 		}
 	}
