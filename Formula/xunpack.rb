@@ -9,8 +9,8 @@ class Xunpack < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.6/xunpack_0.0.6_darwin_amd64.tar.gz"
-      sha256 "564fc1a5526156dfb72e72ccb17d61f74e3287318cf06d104538f2283884c5af"
+      url "https://github.com/DoodleScheduling/xunpack/archive/v0.0.7.tar.gz"
+      sha256 "5bc836d1095d2ca70ac842f158f7986f4e15da64b70fa1e0a5ed2b82fa3a0f5d"
 
       def install
         bin.install "xunpack"
