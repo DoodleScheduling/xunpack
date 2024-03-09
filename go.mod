@@ -1,6 +1,8 @@
 module github.com/doodlescheduling/xunpack
 
-go 1.20
+go 1.22
+
+toolchain go1.22.1
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24
@@ -10,7 +12,7 @@ require (
 	github.com/go-logr/zapr v1.3.0
 	github.com/google/go-cmp v0.6.0
 	github.com/google/go-containerregistry v0.19.0
-	github.com/sethvargo/go-envconfig v0.9.0
+	github.com/sethvargo/go-envconfig v1.0.1
 	github.com/spf13/pflag v1.0.5
 	go.uber.org/zap v1.26.0
 	k8s.io/apiextensions-apiserver v0.28.3
