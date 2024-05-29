@@ -4,7 +4,7 @@
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/xunpack/badge)](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/xunpack)
 [![Coverage Status](https://coveralls.io/repos/github/DoodleScheduling/xunpack/badge.svg?branch=master)](https://coveralls.io/github/DoodleScheduling/xunpack?branch=master)
 
-This small utitily extrats manifests from crossplane packages
+This small utility extracts manifests from crossplane packages
 as well as converts any CompositeResourceDefinitions into CustomResourceDefinitions.
 
 Crossplane packages are installed at runtime and any crossplane manifests are only available within the cluster.
@@ -31,8 +31,8 @@ docker pull ghcr.io/doodlescheduling/xunpack:v0
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | `--file`  | `-f`  | `IFILE` | `/dev/stdin` | Path to input |
 | `--workers`  | ``  | `WORKERS`  | `Number of CPU cores` | Number of workers to process the manifest |
-| `--fail-fast`  | ``  | `FAIL_FAST` | `false` | Exit early if an error occured |
-| `--allow-failure`  | ``  | `ALLOW_FAILURE` | `false` | Do not exit > 0 if an error occured |
+| `--fail-fast`  | ``  | `FAIL_FAST` | `false` | Exit early if an error occurred |
+| `--allow-failure`  | ``  | `ALLOW_FAILURE` | `false` | Do not exit > 0 if an error occurred |
 | `--output`  | `-o`  | `OUTPUT` | `/dev/stdout` | Path to output file |
 
 
