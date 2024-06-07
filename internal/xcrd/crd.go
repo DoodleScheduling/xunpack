@@ -26,11 +26,9 @@ import (
 	"encoding/json"
 
 	extv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/utils/ptr"
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
-	"github.com/crossplane/crossplane-runtime/pkg/meta"
 
 	v1 "github.com/crossplane/crossplane/apis/apiextensions/v1"
 )
@@ -100,10 +98,6 @@ func ForCompositeResourceClaim(xrd *v1.CompositeResourceDefinition) (*extv1.Cust
 
 	crd.SetName(xrd.Spec.ClaimNames.Plural + "." + xrd.Spec.Group)
 	setCrdMetadata(crd, xrd)
-	crd.SetOwnerReferences([]metav1.OwnerReference{meta.AsController(
-		meta.TypedReferenceTo(xrd, v1.CompositeResourceDefinitionGroupVersionKind),
-	)})
-
 	crd.Spec.Names.Categories = append(crd.Spec.Names.Categories, CategoryClaim)
 
 	for i, vr := range xrd.Spec.Versions {

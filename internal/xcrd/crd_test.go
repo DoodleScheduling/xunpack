@@ -32,7 +32,6 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
-	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/test"
 
 	v1 "github.com/crossplane/crossplane/apis/apiextensions/v1"
@@ -163,9 +162,6 @@ func TestForCompositeResource(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			Name:   name,
 			Labels: labels,
-			OwnerReferences: []metav1.OwnerReference{
-				meta.AsController(meta.TypedReferenceTo(d, v1.CompositeResourceDefinitionGroupVersionKind)),
-			},
 		},
 		Spec: extv1.CustomResourceDefinitionSpec{
 			Group: group,
@@ -477,9 +473,6 @@ func TestForCompositeResourceEmptyXrd(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			Name:   name,
 			Labels: labels,
-			OwnerReferences: []metav1.OwnerReference{
-				meta.AsController(meta.TypedReferenceTo(d, v1.CompositeResourceDefinitionGroupVersionKind)),
-			},
 		},
 		Spec: extv1.CustomResourceDefinitionSpec{
 			Group: group,
@@ -925,9 +918,6 @@ func TestForCompositeResourceClaim(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			Name:   claimPlural + "." + group,
 			Labels: labels,
-			OwnerReferences: []metav1.OwnerReference{
-				meta.AsController(meta.TypedReferenceTo(d, v1.CompositeResourceDefinitionGroupVersionKind)),
-			},
 		},
 		Spec: extv1.CustomResourceDefinitionSpec{
 			Group: group,
@@ -1227,9 +1217,6 @@ func TestForCompositeResourceClaimEmptyXrd(t *testing.T) {
 		ObjectMeta: metav1.ObjectMeta{
 			Name:   claimPlural + "." + group,
 			Labels: labels,
-			OwnerReferences: []metav1.OwnerReference{
-				meta.AsController(meta.TypedReferenceTo(d, v1.CompositeResourceDefinitionGroupVersionKind)),
-			},
 		},
 		Spec: extv1.CustomResourceDefinitionSpec{
 			Group: group,
