@@ -5,20 +5,20 @@
 class Xunpack < Formula
   desc "Extract crossplane resources"
   homepage "https://github.com/DoodleScheduling/xunpack"
-  version "0.0.6"
+  version "0.0.8"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/archive/v0.0.7.tar.gz"
-      sha256 "5bc836d1095d2ca70ac842f158f7986f4e15da64b70fa1e0a5ed2b82fa3a0f5d"
+    on_intel do
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.8/xunpack_0.0.8_darwin_amd64.tar.gz"
+      sha256 "075342c9c3eba1c403b56ddc69fa8a93849567502cf9bb8f6d43cddd546c57d3"
 
       def install
         bin.install "xunpack"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.6/xunpack_0.0.6_darwin_arm64.tar.gz"
-      sha256 "1e24a3a3c0733baebd0e0109d95b1808dfa1d722fbff9042e2bfbdd879cb7195"
+    on_arm do
+      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.8/xunpack_0.0.8_darwin_arm64.tar.gz"
+      sha256 "f4b20d61ef9230afe3df0be9b7c8bfc9f5c2e51b5c9094d4432b7d23a962c148"
 
       def install
         bin.install "xunpack"
@@ -27,20 +27,24 @@ class Xunpack < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.6/xunpack_0.0.6_linux_amd64.tar.gz"
-      sha256 "a8791aa7583ccf2df828c37ee610c204ef72c4641aa06f10d3998808c724c23d"
+    on_intel do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.8/xunpack_0.0.8_linux_amd64.tar.gz"
+        sha256 "1128f38c29e68c1b9ad88ef7d2dc09c0c70b2e8eab462d80bf2ea95ed583aa0d"
 
-      def install
-        bin.install "xunpack"
+        def install
+          bin.install "xunpack"
+        end
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.6/xunpack_0.0.6_linux_arm64.tar.gz"
-      sha256 "6b9a3381efa37a93c74b21714a3cb4517e3b6bdd9d8ac8f26106e827c0a939f6"
+    on_arm do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/DoodleScheduling/xunpack/releases/download/v0.0.8/xunpack_0.0.8_linux_arm64.tar.gz"
+        sha256 "a321d96ba04e490a367aab81efc913369996ffa3aab4891877dac70773f7dc63"
 
-      def install
-        bin.install "xunpack"
+        def install
+          bin.install "xunpack"
+        end
       end
     end
   end
