@@ -64,10 +64,6 @@ func ForCompositeResource(xrd *v1.CompositeResourceDefinition) (*extv1.CustomRes
 
 	crd.SetName(xrd.GetName())
 	setCrdMetadata(crd, xrd)
-	crd.SetOwnerReferences([]metav1.OwnerReference{meta.AsController(
-		meta.TypedReferenceTo(xrd, v1.CompositeResourceDefinitionGroupVersionKind),
-	)})
-
 	crd.Spec.Names.Categories = append(crd.Spec.Names.Categories, CategoryComposite)
 
 	for i, vr := range xrd.Spec.Versions {
