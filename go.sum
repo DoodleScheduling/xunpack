@@ -14,8 +14,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46t
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/creack/pty v1.1.18 h1:n56/Zwd5o6whRC5PMGretI4IdRLlmBXYNjScPaBgsbY=
 github.com/creack/pty v1.1.18/go.mod h1:MOBLtS5ELjhRRrroQr9kyvTxUAFNvYEK993ew/Vr4O4=
-github.com/crossplane/crossplane v1.17.1 h1:c8fr3hC/6y9rkYlOer4qEqduMQ4DXf2rwtIyj7xXpFU=
-github.com/crossplane/crossplane v1.17.1/go.mod h1:AoDLpKyrFqNDnDPkFDY2Csaqv+c0EyVyqdUDJcP9Xk8=
+github.com/crossplane/crossplane v1.17.2 h1:iJyqNCI0ub5W+L/2eUvWnKXHBHhqmRynVDhFuvZanvw=
+github.com/crossplane/crossplane v1.17.2/go.mod h1:KAoOkSa6i9EW+Q9yseuf6GLKSko2HWztkNrFTMeh1bc=
 github.com/crossplane/crossplane-runtime v1.18.0 h1:aAQIMNOgPbbXaqj9CUSv+gPl3QnVbn33YlzSe145//0=
 github.com/crossplane/crossplane-runtime v1.18.0/go.mod h1:p7nVVsLn0CWjsLvLCtr7T40ErbTgNWKRxmYnwFdfXb4=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
