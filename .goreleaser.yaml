@@ -13,7 +13,7 @@ builds:
 archives:
 - id: xunpack
   name_template: "xunpack_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-  builds:
+  ids:
   - xunpack
 
 checksum:
