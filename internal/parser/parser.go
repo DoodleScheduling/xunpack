@@ -204,8 +204,8 @@ func (p *Parser) unpack(pkg *crossplanev1.Provider) ([]byte, error) {
 	}
 
 	defer func() {
-    _ = os.Remove(tmpDir)
-  }()
+		_ = os.Remove(tmpDir)
+	}()
 
 	tb, err := os.CreateTemp("", "image")
 	if err != nil {
@@ -239,8 +239,8 @@ func (p *Parser) unpack(pkg *crossplanev1.Provider) ([]byte, error) {
 		}
 
 		defer func() {
-      _ = compressedLayer.Close()
-    }()
+			_ = compressedLayer.Close()
+		}()
 
 		_, err = io.Copy(compressedLayer, contents)
 		if err != nil {
