@@ -10,7 +10,7 @@ require (
 	github.com/go-logr/zapr v1.3.0
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-containerregistry v0.20.3
-	github.com/sethvargo/go-envconfig v1.2.0
+	github.com/sethvargo/go-envconfig v1.3.0
 	github.com/spf13/pflag v1.0.6
 	go.uber.org/zap v1.27.0
 	k8s.io/apiextensions-apiserver v0.33.0
