@@ -4,7 +4,7 @@ go 1.24.2
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24
-	github.com/crossplane/crossplane v1.20.3
+	github.com/crossplane/crossplane v1.20.4
 	github.com/crossplane/crossplane-runtime v1.20.0
 	github.com/go-logr/logr v1.4.3
 	github.com/go-logr/zapr v1.3.0
@@ -70,7 +70,7 @@ require (
 	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	golang.org/x/tools v0.39.0 // indirect
-	golang.org/x/tools/go/packages/packagestest v0.1.1-deprecated // indirect
+	golang.org/x/tools/go/expect v0.1.0-deprecated // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
