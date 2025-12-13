@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	crossplaneapiextv1 "github.com/crossplane/crossplane/apis/apiextensions/v1"
-	crossplanev1 "github.com/crossplane/crossplane/apis/pkg/v1"
+	crossplaneapiextv1 "github.com/crossplane/crossplane/v2/apis/apiextensions/v1"
+	crossplanev1 "github.com/crossplane/crossplane/v2/apis/pkg/v1"
 	"github.com/doodlescheduling/xunpack/internal/worker"
 	"github.com/doodlescheduling/xunpack/internal/xcrd"
 	"github.com/go-logr/logr"
