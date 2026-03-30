@@ -1,12 +1,10 @@
 name: pr-build
-
 on:
   pull_request:
     types:
       - opened
       - synchronize
       - reopened
-
 jobs:
   fmt:
     runs-on: ubuntu-latest
@@ -14,7 +12,7 @@ jobs:
       - name: Harden Runner
         uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
         with:
-          egress-policy: audit    
+          egress-policy: audit
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Setup Go
@@ -34,11 +32,10 @@ jobs:
             echo 'run <make test> and commit changes'
             exit 1
           fi
-
   build:
     runs-on: ubuntu-latest
     outputs:
-      profiles: ${{ steps.profiles.outputs.matrix }}    
+      profiles: ${{ steps.profiles.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -59,3 +56,5 @@ jobs:
             echo 'run <make test> and commit changes'
             exit 1
           fi
+  validate-chart:
+    steps: []
