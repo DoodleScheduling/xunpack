@@ -1,11 +1,11 @@
 module github.com/doodlescheduling/xunpack
 
-go 1.25.7
+go 1.25.9
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24
-	github.com/crossplane/crossplane v1.20.5
-	github.com/crossplane/crossplane-runtime v1.20.0
+	github.com/crossplane/crossplane v1.20.7
+	github.com/crossplane/crossplane-runtime v1.20.6
 	github.com/go-logr/logr v1.4.3
 	github.com/go-logr/zapr v1.3.0
 	github.com/google/go-cmp v0.7.0
