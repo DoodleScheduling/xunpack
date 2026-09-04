@@ -6,8 +6,8 @@ import (
 	"os"
 	"runtime"
 
-	crossplaneapiextv1 "github.com/crossplane/crossplane/apis/apiextensions/v1"
-	crossplanev1 "github.com/crossplane/crossplane/apis/pkg/v1"
+	crossplaneapiextv1 "github.com/crossplane/crossplane/v2/apis/apiextensions/v1"
+	crossplanev1 "github.com/crossplane/crossplane/v2/apis/pkg/v1"
 	"github.com/go-logr/logr"
 	"github.com/go-logr/zapr"
 	"github.com/sethvargo/go-envconfig"
